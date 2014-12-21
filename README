@@ -1,0 +1,60 @@
+The program is a small utility used for generating testcases using provided generator and feeding them to a tested program, until one of them is miscalculated or not solved at all.
+
+Usage:
+./run.py [-ah] [-t time] [-i id] [-o eod] [-u pod] [-m mx] -g gen -p prog
+
+Flag explanation:
+-a	run all tests, whether some of them fail or not
+-h	display this help
+-t time
+	limit the execution time to 'time' seconds; default: 2.0
+-i id
+	set input directory to id; default: in/
+-o eod
+	set expected output directory to eod; default: out/
+-u pod
+	set program output directory to pod; default: prog_out/
+	Note that a '/' is needed at the end in i/o/d flags
+-m mx
+	set maximum number of testcases to mx; default: 1000
+-g gen
+	set a command that will generate testcases.
+	Note that it will be called as follows: 'gen cnt if of', where:
+	cnt is current test number, and if and of are i/o files
+-p prog
+	command used to run a tested program
+
+Example usage:
+
+./run.py -t 1 -g examples/generator.out -p examples/tletest.out -m 5 -a
+
+
+This command will run generator at "examples/generator.out" exactly five times and then run program "examples/tletest.out" on input files, finally comparing output with generated expected output.
+
+
+Example output of command:
+
+Testing test0:
+Time Limit Exceeded
+
+Testing test1:
+Time Limit Exceeded
+
+Testing test2:
+Time Limit Exceeded
+
+Testing test3:
+Time Limit Exceeded
+
+Testing test4:
+Time Limit Exceeded
+
+Statistics:
+========================
+0 x Correct
+0 x Wrong Answer
+5 x Time Limit Exceeded
+(first at in/test0.in)
+========================
+
+
